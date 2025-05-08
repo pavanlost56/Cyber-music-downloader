@@ -23,33 +23,43 @@ Before running this application, ensure you have the following installed:
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/CyberTube-Song-Downloader.git
    cd CyberTube-Song-Downloader
    ```
-2. Navigate into the project directory:
+3. Navigate into the project directory:
+
    ```bash
    cd CyberTube-Song-Downloader
    ```
-3. Install the required dependencies:
-   ```bash
+5. Install the required dependencies:
+
+    ```bash
    npm install
    ```
-4. Install the prerequisites:
-    Download and install FFmpeg and yt-dlp following the links in the Prerequisites section.
-5. Run the Application:
+7. Install the prerequisites:
+  -Download and install FFmpeg and yt-dlp following the links in the Prerequisites section.
+
+8. Run the Application:
+
    ```bash
    npm start
    ```
    This will launch the CyberTube Song Downloader with the cyberpunk-themed interface and allow you to start downloading 
    YouTube videos and extracting audio.
+
 ## Usage:
 - Open the application.
 - Enter the URL of the YouTube video you want to download or extract audio from.
 - Choose the format (MP4 for video or MP3 for audio).
 - Click "Download" and track the progress in real-time.
+
 ##  Troubleshooting 
--- If you encounter any issues during installation, ensure that Node.js, FFmpeg, and yt-dlp are properly installed and their paths are correctly set.
--- Make sure the yt-dlp executable is located in the root folder of the project.
+ - If you encounter any issues during installation, ensure that Node.js, FFmpeg, and yt-dlp are properly installed and their 
+   paths are correctly set.
+-  Make sure the yt-dlp executable is located in the root folder of the project.
+
 ## Contributing 
-   Feel free to fork the repository and submit pull requests! Contributions to improve the interface, add features, or fix bugs are always welcome.
+   Feel free to fork the repository and submit pull requests! Contributions to improve the interface, add features, or fix 
+   bugs are always welcome.
