@@ -1,0 +1,24 @@
+
+## requirements.txt
+
+```plaintext:e%3A%5CCodeSpaces%5CYoutify%20song%20download%5Crequirements.txt
+# Node.js Dependencies (these are managed by package.json)
+# Listed here for reference
+
+# System Requirements
+Node.js >= 14.0.0
+FFmpeg >= 4.0.0
+yt-dlp >= 2023.03.04
+
+# External Tools
+# These need to be installed separately
+1. FFmpeg - https://ffmpeg.org/download.html
+2. yt-dlp - https://github.com/yt-dlp/yt-dlp/releases
+
+# Node.js Dependencies
+# Install using: npm install
+express@5.1.0
+cors@2.8.5
+body-parser@2.2.0
+yt-dlp-exec@1.0.2
+fluent-ffmpeg@2.1.3

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberTube Downloader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="glitch-text">CYBER<span class="highlight">TUBE</span></h1>
+            <p class="subtitle">NEURAL NETWORK AUDIO/VIDEO EXTRACTION</p>
+        </header>
+        
+        <main>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-title">DOWNLOAD INTERFACE v2.077</span>
+                    <div class="terminal-controls">
+                        <span class="control"></span>
+                        <span class="control"></span>
+                        <span class="control"></span>
+                    </div>
+                </div>
+                
+                <div class="terminal-content">
+                    <form id="download-form">
+                        <div class="input-group">
+                            <label for="url">TARGET URL:</label>
+                            <input type="text" id="url" name="url" placeholder="ENTER YOUTUBE URL" required>
+                        </div>
+                        
+                        <div class="format-options">
+                            <p class="option-title">SELECT FORMAT:</p>
+                            <div class="radio-group">
+                                <label class="radio-container">
+                                    <input type="radio" name="format" value="audio" checked>
+                                    <span class="radio-custom"></span>
+                                    AUDIO ONLY
+                                </label>
+                                <label class="radio-container">
+                                    <input type="radio" name="format" value="video">
+                                    <span class="radio-custom"></span>
+                                    VIDEO + AUDIO
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="download-btn">
+                            <span class="btn-text">DOWNLOAD</span>
+                            <span class="btn-glow"></span>
+                        </button>
+                    </form>
+                    
+                    <div class="loading-container" id="loading">
+                        <div class="loading-text">NEURAL EXTRACTION IN PROGRESS</div>
+                        <div class="loading-icon"></div>
+                        <div class="loading-bar">
+                            <div class="loading-progress"></div>
+                        </div>
+                        <div class="loading-percentage">0%</div>
+                    </div>
+                    
+                    <div id="status" class="status-message"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>CYBERTUBE © 2077 • FOR PERSONAL USE ONLY</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
