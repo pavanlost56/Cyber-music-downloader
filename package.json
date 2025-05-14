@@ -1,7 +1,7 @@
 {
   "name": "cyber-song-downloader",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,8 @@
     "express": "^5.1.0",
     "fluent-ffmpeg": "^2.1.3",
     "yt-dlp-exec": "^1.0.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
