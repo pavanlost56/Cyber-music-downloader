@@ -4,10 +4,6 @@ const bodyParser = require('body-parser');
 const ytdlp = require('yt-dlp-exec');
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
-const util = require('util');
-
-const execPromise = util.promisify(exec);
 
 const app = express();
 const PORT = 3000;
@@ -39,11 +35,6 @@ app.post('/api/download', async (req, res) => {
     const outputTemplate = path.join(downloadsDir, `${id}`);
 
     try {
-        // Check if we're using local yt-dlp.exe or system-installed yt-dlp
-        const ytdlpPath = fs.existsSync(path.join(__dirname, 'yt-dlp.exe')) 
-            ? path.join(__dirname, 'yt-dlp.exe')
-            : 'yt-dlp';
-        
         // Check for FFmpeg in common locations
         let ffmpegPath = '';
         const possibleFFmpegPaths = [
@@ -51,55 +42,41 @@ app.post('/api/download', async (req, res) => {
             'C:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe',
             path.join(__dirname, 'ffmpeg.exe')
         ];
-        
+
         for (const possiblePath of possibleFFmpegPaths) {
             if (fs.existsSync(possiblePath)) {
                 ffmpegPath = possiblePath;
                 break;
             }
         }
-        
-        console.log(`Using yt-dlp from: ${ytdlpPath}`);
-        console.log(`Using FFmpeg from: ${ffmpegPath || 'System PATH'}`);
-        
-        let command;
+
+        const options = {
+            output: `${outputTemplate}.%(ext)s`,
+        };
+
         if (format === 'audio') {
-            command = `"${ytdlpPath}" -x --audio-format mp3`;
-            
-            // Add FFmpeg location if found
-            if (ffmpegPath) {
-                command += ` --ffmpeg-location "${path.dirname(ffmpegPath)}"`;
-            }
-            
-            command += ` -o "${outputTemplate}.%(ext)s" ${url}`;
+            options.extractAudio = true;
+            options.audioFormat = 'mp3';
         } else {
-            command = `"${ytdlpPath}" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4"`;
-            
-            // Add FFmpeg location if found
-            if (ffmpegPath) {
-                command += ` --ffmpeg-location "${path.dirname(ffmpegPath)}"`;
-            }
-            
-            command += ` -o "${outputTemplate}.%(ext)s" ${url}`;
+            options.format = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4';
         }
-        
-        console.log(`Executing command: ${command}`);
-        
-        const { stdout, stderr } = await execPromise(command);
-        console.log('Download output:', stdout);
-        
-        if (stderr) {
-            console.error('Download stderr:', stderr);
+
+        if (ffmpegPath) {
+            options.ffmpegLocation = path.dirname(ffmpegPath);
         }
-        
+
+        console.log('Starting download with yt-dlp-exec...');
+        const output = await ytdlp(url, options);
+        console.log('yt-dlp output:', output);
+
         // Find the created file
         const files = fs.readdirSync(downloadsDir);
         const downloadedFile = files.find(file => file.startsWith(id.toString()));
-        
+
         if (!downloadedFile) {
             throw new Error('Downloaded file not found');
         }
-        
+
         const fileName = downloadedFile;
         res.json({ success: true, downloadUrl: `/downloads/${fileName}` });
     } catch (err) {
